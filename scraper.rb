@@ -1,22 +1,31 @@
+require 'httparty'
 require 'nokogiri'
-require 'pry'
 
 class Scraper
 
-    def open
-        Nokogiri::HTML(open("http://www.tigerdirect.com/applications/category/category_slc.asp?CatId=4935"))    
+attr_accessor :product, :price, :model
+
+ def get_page
+    doc = HTTParty.get("http://www.tigerdirect.com/applications/category/category_tlc.asp?CatId=17")
+    @product ||= Nokogiri::HTML(doc)
+  end
+    
+    def model
+        @title||= get_page.css(".itemName").text
+
     end
 
-    def info
-        laptop = parse_page.css(".itemName"){ |laptop| name.text}.compact
-        price = parse_page.css(".oldPrice"){ |price| price.text}.compact
-
+    def cost
+       @price||= get_page.css(".salePrice").text
     end
 
+  
     scraper = Scraper.new
- 
-    def display
-        puts "Laptop: #{laptop[index]}, Price: #{price[index]}"
-    end
-end   
+    laptop = scraper.model
+    prices = scraper.cost
 
+    (0...prices.size).each do |index|
+      puts "Title: #{laptop} | Price: #{prices}"
+    end
+
+end  
