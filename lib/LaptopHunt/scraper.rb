@@ -1,35 +1,13 @@
+class LaptopHunt::Scraper
+
+  min = gets.chomp.to_i
+  max = gets.chomp.to_i
+ 
+  html = Nokogiri::HTML(open("http://www.tigerdirect.com/applications/category/category_slc.asp?Lprice=#{min}&Hprice=#{max}&CatId=17"))
 
 
-require 'httparty'
-require 'nokogiri'
-
-class Scraper
-
-attr_accessor :product, :price, :model
-
- def get_page
-    doc = HTTParty.get("http://www.tigerdirect.com/applications/category/category_tlc.asp?CatId=17")
-    @product ||= Nokogiri::HTML(doc)
+    html.css('.itemName .salePrice').each do |div|
+     LaptopHunt::Laptop.new_from_index_page(div)
+   end
   end
-    
-    def model
-        @title||= get_page.css(".itemName").css("h3").map {|name| name.text}.compact
 
-    end
-
-    def cost
-       @price||= get_page.css(".oldPrice").css("span").map {|price| price.text}.compact
-
-    end
-
-  
-    scraper = Scraper.new
-    laptop = scraper.model
-    prices = scraper.cost
-
-    (0...prices.size).each do |index|
-      puts "------- index: #{index + 1} -------"
-      puts "Title: #{laptop} | Price: #{prices}"
-    end
-
-end  
