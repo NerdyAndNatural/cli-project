@@ -1,40 +1,30 @@
 
 class LaptopHunt::Laptop
+  
+  attr_accessor :model, :price, :link
 
-    @@all = []
+  @all = []
 
-    attr_accessor :name, :model, :price
+  def initialize(name, model)
+   @model = model
+   @price = price
+ end
 
-    url = "http://www.tigerdirect.com/applications/category/category_slc.asp?CatId=4935"
+ def self.all
+  @all
+end
 
 
-    def initialize
+def laptop
+  model = page.css("span[data-testid='productseries']").text
+  price = page.css("strong[data-testid='startingatprice']").text
 
-        @name = name
-        @model = model
-        @price = price
-        @@all << self
+end
 
-    end
 
-    def self.all
-        @@all
-      end
-
-    def rangeA
-      @title||= get_page.css(".itemName").text
-    end
-
-    def model
-        @title||= get_page.css(".itemName").text
-    end
-
-    def cost
-       @price||= get_page.css(".salePrice").text
-    end
-
-    def doc
-      @doc ||= HTTParty::HTML(open(self.url))
-    end
- 
+def print_laptop
+  all.each_with_index do |model, index|
+    puts "#{selected_number}.     #{laptop.model}    #{laptop.price}"
+  end
+end
 end

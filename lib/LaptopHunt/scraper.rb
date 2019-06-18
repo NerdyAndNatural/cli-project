@@ -1,13 +1,14 @@
+require 'nokogiri'
+require 'open-uri'
+
 class LaptopHunt::Scraper
 
-  min = gets.chomp.to_i
-  max = gets.chomp.to_i
- 
-  html = Nokogiri::HTML(open("http://www.tigerdirect.com/applications/category/category_slc.asp?Lprice=#{min}&Hprice=#{max}&CatId=17"))
+  def scrape_laptop
+  
+    page = Nokogiri::HTML(open("https://www.dell.com/en-us/shop/scc/sc/laptops"))
 
-
-    html.css('.itemName .salePrice').each do |div|
-     LaptopHunt::Laptop.new_from_index_page(div)
-   end
+    page.css("span[data-testid='productseries']").each_with_index do |model, index|
+      puts "#{index + 1}. #{model.text} "
+    end
   end
-
+end

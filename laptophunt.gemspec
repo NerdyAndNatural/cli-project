@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.executables << 'LaptopHunt'
 
   s.add_development_dependency "bundler", ">= 0"
-  s.add_development_dependency "rake", "~> 10.0"
+  s.add_development_dependency "rake", ">= 0"
   s.add_development_dependency "rspec", ">= 0"
   s.add_development_dependency "nokogiri", ">= 0"
   s.add_development_dependency "httparty", ">= 0"

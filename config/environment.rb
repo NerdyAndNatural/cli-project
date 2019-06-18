@@ -1,6 +1,6 @@
 require 'pry'
 require 'nokogiri'
-require 'httparty'
+require 'open-uri'
 
 require_relative '../lib/LaptopHunt/scraper.rb'
 require_relative '../lib/LaptopHunt/Laptop.rb'

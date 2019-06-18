@@ -1,40 +1,32 @@
 
 class LaptopHunt::CLI
-
-  
-
-    def run
-      LaptopHunt::Scraper.new.display_laptops
-        puts "Welcome to LaptopHunt. Let's help you find a laptop!"
-        sleep(2)
-        search
-    end
-
-    def search
-
-        puts "What is your price range?"
-        sleep(1)
-         
-        min = gets.chomp.to_i
-        max = gets.chomp.to_i
-        
-        end
-    end
+  def run
     
-  def range_200 (laptop)
-     puts "#{laptop.model}-----#{laptop.cost}"
-    end
-
+    puts "Welcome to LaptopHunt!"
     
-  #def self.selection
-    #puts "Select from the list below to see more information"
-    #details
-    #end
+    puts "Which model would you like to view?"
+    sleep(1)
+     
+    LaptopHunt::Scraper.new.scrape_laptop
+       
+    input = gets.strip.to_i
 
-def details
-    puts 
-    more
+    selected_number = input
+
+    loop do 
+      if input.to_i > 0
+          LaptopHunt::Laptop.print_laptop
+          sleep(5)
+          more
+          break
+      else 
+        puts "Please enter a number from the list"
+        input = gets.strip.to_i
+
+      end
+    end
   end
+
 
   def more
     puts "Would you like to see more laptops (Y/N)?"
@@ -42,7 +34,7 @@ def details
 
     loop do
       if answer.include?("Y") || answer.include?("y")
-        search
+        run
         break
       elsif answer.include?("N") || answer.include?("n")
         puts "Thank you and have a nice day!"
@@ -54,4 +46,7 @@ def details
     end
   end
 end
+
+
+
 
