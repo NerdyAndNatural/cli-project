@@ -15,16 +15,9 @@ class LaptopHunt::Laptop
 end
 
 
-def laptop
-  model = page.css("span[data-testid='productseries']").text
-  price = page.css("strong[data-testid='startingatprice']").text
-
-end
-
-
-def print_laptop
-  all.each_with_index do |model, index|
-    puts "#{selected_number}.     #{laptop.model}    #{laptop.price}"
+def self.print_laptop
+  scrape_details.each_with_index do |model, price, index|
+    puts "#{selected_number}.     #{model.text}    #{price.text}"
   end
 end
 end

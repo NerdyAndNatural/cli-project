@@ -3,9 +3,9 @@ class LaptopHunt::CLI
   def run
     
     puts "Welcome to LaptopHunt!"
-    
-    puts "Which model would you like to view?"
     sleep(1)
+    puts "Which model would you like to view?"
+    
      
     LaptopHunt::Scraper.new.scrape_laptop
        
@@ -15,7 +15,7 @@ class LaptopHunt::CLI
 
     loop do 
       if input.to_i > 0
-          LaptopHunt::Laptop.print_laptop
+          LaptopHunt::Laptop.new.print_laptop
           sleep(5)
           more
           break
@@ -26,7 +26,6 @@ class LaptopHunt::CLI
       end
     end
   end
-
 
   def more
     puts "Would you like to see more laptops (Y/N)?"
