@@ -1,23 +1,22 @@
 
 class LaptopHunt::Laptop
   
-  attr_accessor :model, :price, :link
+  attr_accessor :title, :url
 
-  @all = []
+  @@all = []
 
-  def initialize(name, model)
-   @model = model
-   @price = price
+def initialize(title=nil, url=nil)
+   @title = title
+   @url = url
+   self
  end
 
  def self.all
-  @all
+  @@all
 end
 
+def self.find(id)
+  @@all[id.to_i-1]
+end
+end
 
-def self.print_laptop
-  scrape_details.each_with_index do |model, price, index|
-    puts "#{selected_number}.     #{model.text}    #{price.text}"
-  end
-end
-end

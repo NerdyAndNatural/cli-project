@@ -1,50 +1,28 @@
 
 class LaptopHunt::CLI
+
   def run
-    
+
     puts "Welcome to LaptopHunt!"
-    sleep(1)
-    puts "Which model would you like to view?"
     
-     
-    LaptopHunt::Scraper.new.scrape_laptop
+    puts "Which model would you like to view?"
+
+    list_laptop
        
-    input = gets.strip.to_i
+    #input = gets.strip.to_i
 
-    selected_number = input
-
-    loop do 
-      if input.to_i > 0
-          LaptopHunt::Laptop.new.print_laptop
-          sleep(5)
-          more
-          break
-      else 
-        puts "Please enter a number from the list"
-        input = gets.strip.to_i
+    #display_details
 
       end
     end
-  end
 
-  def more
-    puts "Would you like to see more laptops (Y/N)?"
-    answer = gets.chomp
-
-    loop do
-      if answer.include?("Y") || answer.include?("y")
-        run
-        break
-      elsif answer.include?("N") || answer.include?("n")
-        puts "Thank you and have a nice day!"
-        break
-      else
-        puts "Please select Y or N"
-        answer = gets.chomp
+    def list_laptop
+      LaptopHunt::Scraper.scrape_laptop
+      LaptopHunt::Scraper.laptop_list
+      LaptopHunt::Laptop.all.each_with_index do |laptop, index|
+            puts "#{index+1}.      #{laptop.title}"
       end
     end
-  end
-end
 
 
 

@@ -1,27 +1,23 @@
-require 'nokogiri'
-require 'open-uri'
 
-class LaptopHunt::Scraper
 
-  def scrape_laptop
-    url = "https://www.bestbuy.com/site/laptop-computers/all-laptops/pcmcat138500050001.c?id=pcmcat138500050001"
+ class LaptopHunt::Scraper
 
-    main_page = Nokogiri::HTML(open(url))
+  def self.scrape_laptop
 
-    laptop_list = main_page.css("h4.sku-header")[0..9]
+    @main_page = Nokogiri::HTML(open("https://www.bestbuy.com/site/laptop-computers/all-laptops/pcmcat138500050001.c?id=pcmcat138500050001"))
 
-    laptop_list.each_with_index do |model, index|
-      puts "#{index + 1}. #{model.text} "
-    end
-  end
+    @scrape = @main_page.css("div.shop-sku-list-item")
+   end
 
-  def scrape_details
-    laptop_url = "https://www.bestbuy.com/"
+   def self.laptop_list
+    @scrape.each do |item|
+      title = item.css("h4.sku-header")[0..9].text
+      laptop = LaptopHunt::Laptop.new(title)
+      LaptopHunt::Laptop.all << laptop
     
-    detail_page = Nokogiri::HTML(open(laptop_url))
-
-    model = detail_page.css("span[data-testid='productseries']")
-    price = detail_page.css("strong[data-testid='startingatprice']")
+   end
 
   end
+
 end
+
