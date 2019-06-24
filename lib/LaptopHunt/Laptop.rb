@@ -1,13 +1,14 @@
 
 class LaptopHunt::Laptop
   
-  attr_accessor :title, :price
+  attr_accessor :title, :price, :ratings
 
   @@all = []
 
-def initialize(title, price)
+def initialize(title, price, ratings)
    @title = title
    @price = price
+   @ratings = ratings
    self
 
  end

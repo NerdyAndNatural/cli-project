@@ -17,13 +17,9 @@ class LaptopHunt::CLI
     
     puts "Which model would you like to view?"
 
-    list
+    laptop_list
        
     input = gets.strip
-
-    #selected_laptop = LaptopHunt::Laptop.find(input.to_i)
-
-    #puts "Specs for #{selected_laptop.title}:"
 
     laptop = LaptopHunt::Laptop.find(input.to_i)
     
@@ -32,7 +28,7 @@ class LaptopHunt::CLI
       end
 
 
-    def list
+    def laptop_list
       LaptopHunt::Laptop.all[0, 10].each_with_index do |laptop, index|
             puts "#{index+1}.  #{laptop.title} "
             
@@ -40,11 +36,11 @@ class LaptopHunt::CLI
     end
 
     def display_details(laptop) 
-      puts "                               "
-    puts " Laptop Details:"
+    puts "                               "
+    puts " Laptop Details: #{laptop.title}"
     puts "   #{laptop.price}        "
     puts "                               "
-    puts "                               "   
+    puts "   #{laptop.ratings}                       "   
 
   end
 end
