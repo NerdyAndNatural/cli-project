@@ -1,14 +1,15 @@
 
 class LaptopHunt::Laptop
   
-  attr_accessor :title, :url
+  attr_accessor :title, :price
 
   @@all = []
 
-def initialize(title=nil, url=nil)
+def initialize(title, price)
    @title = title
-   @url = url
+   @price = price
    self
+
  end
 
  def self.all
@@ -16,7 +17,7 @@ def initialize(title=nil, url=nil)
 end
 
 def self.find(id)
-  @@all[id.to_i-1]
+  self.all[id-1]
 end
 end
 
