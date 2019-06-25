@@ -9,25 +9,33 @@ class LaptopHunt::CLI
   def run
 
     puts "Welcome to LaptopHunt!"
+    sleep(3)
+    puts "Let's help you find a laptop"
+    sleep(3)
+    selection
+  end
 
+    def selection
     puts "Would you like to view A)Apple or B)PC laptops?"
 
-        answer = gets.chomp
+        answer = gets.strip.downcase
         
         loop do
-          if answer.include?("A") || answer.include?("a")
+          if answer == "a"
             puts "Loading Macbooks..."
             sleep(1)
              apple_list
+             puts "                               "
              puts "Which model would you like to view?"
               input = gets.strip
               mac = LaptopHunt::Laptop.find(input.to_i)
-              apple_details(mac) 
+              apple_details(mac)
              break
-            elsif answer.include?("B") || answer.include?("b")
-              puts "Loading laptop PC's lists..."
+            elsif answer == "b"
+              puts "Loading laptop PC's..."
               sleep(1)
               laptop_list
+              puts "                               "
               puts "Which model would you like to view?"
               input = gets.strip
               laptop = LaptopHunt::Laptop.find(input.to_i)
@@ -38,11 +46,6 @@ class LaptopHunt::CLI
     
               puts "please select A or B"
               answer = gets.chomp
-    puts "Which model would you like to view?"
-      
-    input = gets.strip
-
-    
 
       end
     end
@@ -66,6 +69,8 @@ class LaptopHunt::CLI
     puts "                               "
     puts "   #{laptop.ratings}                       "   
 
+  sleep(5)
+  more
   end
 
   def apple_list
@@ -84,7 +89,27 @@ class LaptopHunt::CLI
   puts "                               "
   puts "   #{mac.ratings}                       "   
 
-end
+  sleep(5)
+  more
 end
 
+def more
+  puts "What would you like to do now?"
+  puts "Type start over to start from the beginning or exit to close"
+  answer = gets.strip.downcase
+  loop do
+    if answer == "start over"
+      run
+      break
+    elsif answer == "exit"
+      puts "Have a nice day!"
+      exit
+    else puts "Please enter A or B"
+      more
+    end
+  end
+
+
+end
+end
 
