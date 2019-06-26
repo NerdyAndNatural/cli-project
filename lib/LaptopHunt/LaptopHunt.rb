@@ -27,8 +27,9 @@ class LaptopHunt::CLI
              apple_list
              puts "                               "
              puts "Which model would you like to view?"
+             puts "Enter 1-10"
               input = gets.strip
-              mac = LaptopHunt::Laptop.find(input.to_i)
+              mac = LaptopHunt::Apple.find(input.to_i)
               apple_details(mac)
              break
             elsif answer == "b"
@@ -37,6 +38,7 @@ class LaptopHunt::CLI
               laptop_list
               puts "                               "
               puts "Which model would you like to view?"
+              puts "Enter 1-10"
               input = gets.strip
               laptop = LaptopHunt::Laptop.find(input.to_i)
     
@@ -66,8 +68,8 @@ class LaptopHunt::CLI
     puts "                               "
     puts " Laptop Details: #{laptop.title}"
     puts "   #{laptop.price}        "
+    puts "   #{laptop.ratings}                       " 
     puts "                               "
-    puts "   #{laptop.ratings}                       "   
 
   sleep(5)
   more
@@ -76,18 +78,18 @@ class LaptopHunt::CLI
   def apple_list
     LaptopHunt::Scraper.scrape_apple
     LaptopHunt::Scraper.apple_list
-    LaptopHunt::Laptop.all[0, 10].each_with_index do |mac, index|
+    LaptopHunt::Apple.all[0, 10].each_with_index do |mac, index|
           puts "#{index+1}.  #{mac.title} "
           
     end
   end
 
   def apple_details(mac) 
-  puts "                               "
-  puts " Tablet Details: #{mac.title}"
-  puts "   #{mac.price}        "
-  puts "                               "
-  puts "   #{mac.ratings}                       "   
+    puts "                               "
+    puts " Tablet Details: #{mac.title}"
+    puts "   #{mac.price}        "
+    puts "   #{mac.ratings}                       " 
+    puts "                               "
 
   sleep(5)
   more
@@ -99,7 +101,7 @@ def more
   answer = gets.strip.downcase
   loop do
     if answer == "start over"
-      run
+      call
       break
     elsif answer == "exit"
       puts "Have a nice day!"
