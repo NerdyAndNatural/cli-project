@@ -8,7 +8,6 @@ class LaptopHunt::Apple
      @title = title
      @price = price
      @ratings = ratings
-     @shipping = shipping
      self
   
    end

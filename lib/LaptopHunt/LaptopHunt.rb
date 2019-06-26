@@ -69,6 +69,7 @@ class LaptopHunt::CLI
     puts " Laptop Details: #{laptop.title}"
     puts "   #{laptop.price}        "
     puts "   #{laptop.ratings}                       " 
+    puts "   #{laptop.shipping}                       " 
     puts "                               "
 
   sleep(5)
@@ -97,13 +98,13 @@ end
 
 def more
   puts "What would you like to do now?"
-  puts "Type start over to start from the beginning or exit to close"
+  puts "Press A to start over or B to Exit"
   answer = gets.strip.downcase
   loop do
-    if answer == "start over"
+    if answer == "a"
       call
       break
-    elsif answer == "exit"
+    elsif answer == "b"
       puts "Have a nice day!"
       exit
     else puts "Please enter A or B"

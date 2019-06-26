@@ -9,7 +9,6 @@ def initialize(title, price, ratings)
    @title = title
    @price = price
    @ratings = ratings
-   @shipping = shipping
    self
 
  end
