@@ -11,7 +11,7 @@
    @scrape.each do |item|
       title = item.css("h4.sku-header").text.strip
       price = item.css("div.priceView-customer-price span.sr-only").text
-      ratings = item.css("div.c-ratings-reviews.v-small p.sr-only").text
+      ratings = item.css("div.c-ratings-reviews-v2.v-small p.sr-only").text
       laptop = LaptopHunt::Laptop.new(title, price, ratings)
       LaptopHunt::Laptop.all << laptop
     end
@@ -26,7 +26,7 @@
    @apple.each do |list|
       title = list.css("h4.sku-header").text.strip
       price = list.css("div.priceView-customer-price span.sr-only").text
-      ratings = list.css("div.c-ratings-reviews.v-small p.sr-only").text
+      ratings = list.css("div.c-ratings-reviews-v2.v-small p.sr-only").text
       mac = LaptopHunt::Apple.new(title, price, ratings)
       LaptopHunt::Apple.all << mac
     end
